@@ -1,0 +1,239 @@
+- name: Startpage
+  width: slim
+ # hide-desktop-navigation: true
+  center-vertically: true
+  columns:
+    - size: full
+      widgets:
+        - type: search
+          title: Google
+          engine: google
+          suggestions: true
+          autofocus: true
+
+        - type: monitor
+          cache: 1m
+          title: Services
+          sites:
+            - title: N8N
+              url: https://n8n.dharmintech.org
+              icon: si:n8n
+            - title: Proxmox
+              url: https://192.168.0.190:8006
+              icon: si:proxmox
+            - title: Pi-hole
+              url: http://192.168.0.227/admin/login
+              icon: si:pihole
+            - title: Vaultwarden
+              url: https://vw.dharmintech.org/
+              icon: si:vaultwarden
+            - title: Nginx-proxy-manager
+              url: http://192.168.0.195:81/login
+              icon: si:nginx
+
+        - type: bookmarks
+          groups:
+            - title: General
+              links:
+                - title: Gmail
+                  url: https://mail.google.com/mail/u/0/
+                - title: Gitlab
+                  url: https://gitlab.com/
+                - title: Github
+                  url: https://github.com/
+            - title: Entertainment
+              links:
+                - title: YouTube
+                  url: https://www.youtube.com/
+                - title: Prime Video
+                  url: https://www.primevideo.com/
+                - title: Disney+
+                  url: https://www.disneyplus.com/
+            - title: Tools
+              links:
+                - title: IT-Tools
+                  url: https://it-tools.tech/
+                - title: CyberChef
+                  url: https://gchq.github.io/CyberChef/
+                - title: QuickRef
+                  url: https://www.quickref.me/
+                - title: OverApi
+                  url: https://overapi.com/
+                - title: ipinfo.io
+                  url: https://ipinfo.io/
+
+- name: Markets
+  columns:
+    - size: small
+      widgets:
+        - type: markets
+          title: Indices
+          markets:
+            - symbol: SPY
+              name: S&P 500
+            - symbol: DX-Y.NYB
+              name: Dollar Index
+
+        - type: markets
+          title: Crypto
+          markets:
+            - symbol: BTC-USD
+              name: Bitcoin
+            - symbol: ETH-USD
+              name: Ethereum
+
+        - type: markets
+          title: Stocks
+          sort-by: absolute-change
+          markets:
+            - symbol: NVDA
+              name: NVIDIA
+            - symbol: AAPL
+              name: Apple
+            - symbol: MSFT
+              name: Microsoft
+            - symbol: GOOGL
+              name: Google
+            - symbol: AMD
+              name: AMD
+            - symbol: RDDT
+              name: Reddit
+            - symbol: AMZN
+              name: Amazon
+            - symbol: TSLA
+              name: Tesla
+            - symbol: INTC
+              name: Intel
+            - symbol: META
+              name: Meta
+
+    - size: full
+      widgets:
+        - type: rss
+          title: News
+          style: horizontal-cards
+          feeds:
+            - url: https://feeds.bloomberg.com/markets/news.rss
+              title: Bloomberg
+            - url: https://moxie.foxbusiness.com/google-publisher/markets.xml
+              title: Fox Business
+            - url: https://moxie.foxbusiness.com/google-publisher/technology.xml
+              title: Fox Business
+
+        - type: group
+          widgets:
+            - type: reddit
+              show-thumbnails: true
+              subreddit: technology
+            - type: reddit
+              show-thumbnails: true
+              subreddit: wallstreetbets
+
+        - type: videos
+          style: grid-cards
+          collapse-after-rows: 3
+          channels:
+            - UCvSXMi2LebwJEM1s4bz5IBA # New Money
+            - UCV6KDgJskWaEckne5aPA0aQ # Graham Stephan
+            - UCAzhpt9DmG6PnHXjmJTvRGQ # Federal Reserve
+
+    - size: small
+      widgets:
+        - type: rss
+          title: News
+          limit: 30
+          collapse-after: 13
+          feeds:
+            - url: https://www.ft.com/technology?format=rss
+              title: Financial Times
+            - url: https://feeds.a.dj.com/rss/RSSMarketsMain.xml
+              title: Wall Street Journal
+
+- name: Home
+  # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
+  # hide-desktop-navigation: true
+  columns:
+    - size: small
+      widgets:
+        - type: calendar
+          first-day-of-week: monday
+
+        - type: rss
+          limit: 10
+          collapse-after: 3
+          cache: 12h
+          feeds:
+            - url: https://selfh.st/rss/
+              title: selfh.st
+            - url: https://ciechanow.ski/atom.xml
+              title: ciechanow.ski
+            - url: https://www.joshwcomeau.com/rss.xml
+              title: Josh Comeau
+            - url: https://samwho.dev/rss.xml
+              title: samwho.dev
+            - url: https://ishadeed.com/feed.xml
+              title: Ahmad Shadeed
+
+        - type: twitch-channels
+          channels:
+            - theprimeagen
+            - j_blow
+            - piratesoftware
+            - cohhcarnage
+            - christitustech
+            - EJ_SA
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: hacker-news
+            - type: lobsters
+
+        - type: videos
+          channels:
+            - UCXuqSBlHAE6Xw-yeJA0Tunw # Linus Tech Tips
+            - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+            - UCsBjURrPoezykLs9EqgamOA # Fireship
+            - UCBJycsmduvYEL83R_U4JriQ # Marques Brownlee
+            - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: technology
+              show-thumbnails: true
+            - type: reddit
+              subreddit: selfhosted
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: weather
+          location: Maineville, Ohio, United States
+          units: imperial # alternatively "metric"
+          hour-format: 12h # alternatively "24h"
+          # Optionally hide the location from being displayed in the widget
+
+        - type: markets
+          markets:
+            - symbol: SPY
+              name: S&P 500
+            - symbol: BTC-USD
+              name: Bitcoin
+            - symbol: NVDA
+              name: NVIDIA
+            - symbol: AAPL
+              name: Apple
+            - symbol: PLTR
+              name: Palantir Technologies
+
+        - type: releases
+          cache: 1d
+          # Without authentication the Github API allows for up to 60 requests per hour. You can create a
+          # read-only token from your Github account settings and use it here to increase the limit.
+          # token: ...
+          repositories:
+            - glanceapp/glance
+            - vaultwarden/vaultwarden
+            - pihole/admin
