@@ -1,0 +1,20 @@
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./assets:/app/assets
+      # Optionally, also mount docker socket if you want to use the docker containers widget
+      # - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8080:8080"
+    env_file: .env
+
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token eyJhIjoiNWE4NjYxZTkzM2E1YjQ3YjMyMTUzYzM5YjM1Y2E4YzciLCJ0IjoiMjEzNDVjMGQtNzYyMy00MTUxLWI2OTUtYTAyZmVjNmYyMDc3IiwicyI6Ik9EWT>
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiNWE4NjYxZTkzM2E1YjQ3YjMyMTUzYzM5YjM1Y2E4YzciLCJ0IjoiNGI1MGI3YjctNWI3OC00ZDE3LTlkZTgtMTMyMGU1YjJlOTY3IiwicyI6IlpURmtabVprT0RRdE9XTXpZaTAwWXpBN>
