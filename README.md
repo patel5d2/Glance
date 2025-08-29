@@ -1,93 +1,211 @@
-# glance
+# 🌐 Glance Dashboard
 
+A **self-hosted personal dashboard** powered by [Glance](https://github.com/glanceapp/glance).  
+This project lets you organize bookmarks, news feeds, weather, stocks, homelab status, and more—  
+all on **three cleanly organized pages**:  
 
+- 🏠 **Home:** Tech news, dev blogs, weather, Reddit, Twitch, YouTube  
+- 📈 **Markets:** Stocks, crypto, financial news, and market widgets  
+- 🚀 **Startpage:** Homelab overview, quick bookmarks, and tools
 
-## Getting started
+The dashboard is deployed using **Docker Compose** for easy setup, with **Cloudflare Tunnel** integration for secure remote access.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## 📂 Repository Structure
 
-## Add your files
+```plaintext
+glance/
+├── docker-compose.yml   # Docker Compose config for Glance + Cloudflare tunnel
+├── config/
+│   ├── glance.yml       # Startpage layout and widgets
+│   ├── home.yml         # Home page layout and widgets
+│   └── markets.yml      # Markets/finance dashboard config
+├── assets/
+│   └── user.css         # Custom styling and theme tweaks
+└── .gitkeep             # Keeps empty dirs in version control
+```
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+---
+
+## ✨ Features
+
+* 🔗 **Centralized Startpage** for bookmarks and homelab links
+* 📰 **Dynamic News and RSS Feeds** for tech, Reddit, and YouTube
+* 💹 **Markets Page** for stocks, crypto, and finance tracking
+* 🌤️ **Weather Widgets** with location-based forecasts
+* 🎨 **Custom Theming** via `assets/user.css`
+* 🐳 **Containerized Setup** with Docker Compose
+* ☁️ **Optional Cloudflare Tunnel** for remote, secure access
+* ⚡ **Single-File Configs** for easy editing and backup
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to set up and run the Glance dashboard:
+
+### 1. Clone the Repository
+
+```bash
+git clone git@gitlab.com:patel5d2/glance.git
+cd glance
+```
+
+---
+
+### 2. Configure Dashboard Pages
+
+All customization happens in the `config/` directory:
+
+* **glance.yml** – Main Startpage with bookmarks and tools  
+* **home.yml** – Home dashboard with news, Reddit, weather  
+* **markets.yml** – Finance & markets-focused dashboard  
+
+Each YAML file is organized into sections (columns, widgets, feeds) so you can easily edit bookmarks, RSS sources, or services.
+
+---
+
+### 3. (Optional) Set Environment Variables
+
+If you want to use **Cloudflare Tunnel** for secure remote access, create a `.env` file:
+
+```env
+TUNNEL_TOKEN=<YOUR-CLOUDFLARE-TOKEN>
+```
+
+This will allow `cloudflared` to authenticate and expose your dashboard securely over HTTPS without opening ports.
+
+---
+
+### 4. Start with Docker Compose
+
+Run the following command to spin up your dashboard:
+
+```bash
+docker-compose up -d
+```
+
+Once running, your dashboard will be accessible at:
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/patel5d2/glance.git
-git branch -M main
-git push -uf origin main
+http://localhost:8080
 ```
 
-## Integrate with your tools
+If Cloudflare is enabled, check logs for your public URL:
 
-- [ ] [Set up project integrations](https://gitlab.com/patel5d2/glance/-/settings/integrations)
+```bash
+docker logs cloudflared
+```
 
-## Collaborate with your team
+---
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## 🛠 Customization
 
-## Test and Deploy
+### 🔧 Themes and Styles
 
-Use the built-in continuous integration in GitLab.
+* Modify `assets/user.css` to fully customize the look and feel (colors, fonts, layout tweaks).
+* YAML configuration lets you rearrange widgets, rename sections, and add new data sources easily.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+---
 
-***
+### 🧩 Widgets You Can Add
 
-# Editing this README
+Glance supports a wide range of widgets. Examples include:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+* Weather, Clock, and Calendar
+* Stocks, Crypto, and Finance charts
+* RSS feeds for any blog or news source
+* Reddit & YouTube integrations
+* Twitch streams
+* Homelab monitoring
 
-## Suggestions for a good README
+---
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### 📱 Mobile-Friendly
 
-## Name
-Choose a self-explaining name for your project.
+The dashboard is **responsive**, meaning it adapts well to desktop and mobile screens.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+---
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## ☁️ Remote Access with Cloudflare Tunnel
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+For secure remote access:
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+1. Sign up for a free [Cloudflare account](https://www.cloudflare.com/).  
+2. Create a tunnel token in Cloudflare.  
+3. Add the token to `.env`:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+   ```env
+   TUNNEL_TOKEN=<YOUR-TOKEN>
+   ```
+4. Start the services:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+   ```bash
+   docker-compose up -d
+   ```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+You’ll receive a unique Cloudflare URL to access your dashboard securely over HTTPS.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+---
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## 🖼️ Screenshots
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Here’s a preview of the dashboard layout (replace with your actual screenshots):
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+| Startpage                                      | Markets                                    | Home                                 |
+| ---------------------------------------------- | ------------------------------------------ | ------------------------------------ |
+| ![Startpage](assets/screenshots/startpage.png) | ![Markets](assets/screenshots/markets.png) | ![Home](assets/screenshots/home.png) |
 
-## License
-For open source projects, say how it is licensed.
+---
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## 📦 Tech Stack
+
+| Component                                         | Purpose                                         |
+| ------------------------------------------------- | ----------------------------------------------- |
+| **[Glance](https://github.com/glanceapp/glance)** | Dashboard engine and widget system              |
+| **Docker Compose**                                | Simple container orchestration for services     |
+| **Cloudflare Tunnel**                             | Secure, firewall-free remote access             |
+| **YAML Configs**                                  | Easy configuration of bookmarks, feeds, widgets |
+| **Custom CSS**                                    | Full visual customization                       |
+
+---
+
+## 🔐 Security Notes
+
+* No API keys or sensitive data are committed to Git.  
+* Use a `.env` file for all secrets and tokens.  
+* Cloudflare Tunnel adds an extra layer of security.  
+
+---
+
+## 🧩 Roadmap
+
+* [ ] Add Docker image build automation (GitLab CI/CD)  
+* [ ] Dark/Light mode toggle in `user.css`  
+* [ ] More finance & homelab widgets  
+* [ ] Config template examples for easier setup  
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork this repository  
+2. Create a feature branch (`git checkout -b feature/new-widget`)  
+3. Commit changes (`git commit -m "Add new widget"`)  
+4. Push and open a Merge Request  
+
+---
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+### 💡 Inspiration
+
+Glance is designed to be **simple, self-hosted, and highly customizable**—perfect for homelabbers, developers, and productivity enthusiasts who want **everything in one view** without clutter.
+
