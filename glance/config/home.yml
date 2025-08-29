@@ -1,6 +1,12 @@
+# ============================
+# DASHBOARD CONFIGURATION
+# ============================
+
+# ----------------------------
+# Startpage
+# ----------------------------
 - name: Startpage
   width: slim
- # hide-desktop-navigation: true
   center-vertically: true
   columns:
     - size: full
@@ -12,8 +18,8 @@
           autofocus: true
 
         - type: monitor
-          cache: 1m
           title: Services
+          cache: 30s
           sites:
             - title: N8N
               url: https://n8n.dharmintech.org
@@ -27,7 +33,7 @@
             - title: Vaultwarden
               url: https://vw.dharmintech.org/
               icon: si:vaultwarden
-            - title: Nginx-proxy-manager
+            - title: Nginx Proxy Manager
               url: http://192.168.0.195:81/login
               icon: si:nginx
 
@@ -37,31 +43,45 @@
               links:
                 - title: Gmail
                   url: https://mail.google.com/mail/u/0/
-                - title: Gitlab
+                  icon: si:gmail
+                - title: GitLab
                   url: https://gitlab.com/
-                - title: Github
+                  icon: si:gitlab
+                - title: GitHub
                   url: https://github.com/
+                  icon: si:github
             - title: Entertainment
               links:
                 - title: YouTube
                   url: https://www.youtube.com/
+                  icon: si:youtube
                 - title: Prime Video
                   url: https://www.primevideo.com/
+                  icon: si:primevideo
                 - title: Disney+
                   url: https://www.disneyplus.com/
-            - title: Tools
+                  icon: si:disneyplus
+            - title: Dev & Network Tools
               links:
                 - title: IT-Tools
                   url: https://it-tools.tech/
+                  icon: si:tools
                 - title: CyberChef
                   url: https://gchq.github.io/CyberChef/
+                  icon: si:cyberchef
                 - title: QuickRef
                   url: https://www.quickref.me/
+                  icon: si:book
                 - title: OverApi
                   url: https://overapi.com/
+                  icon: si:api
                 - title: ipinfo.io
                   url: https://ipinfo.io/
+                  icon: si:ipfs
 
+# ----------------------------
+# Markets
+# ----------------------------
 - name: Markets
   columns:
     - size: small
@@ -112,6 +132,7 @@
         - type: rss
           title: News
           style: horizontal-cards
+          cache: 15m
           feeds:
             - url: https://feeds.bloomberg.com/markets/news.rss
               title: Bloomberg
@@ -143,15 +164,17 @@
           title: News
           limit: 30
           collapse-after: 13
+          cache: 30m
           feeds:
             - url: https://www.ft.com/technology?format=rss
               title: Financial Times
             - url: https://feeds.a.dj.com/rss/RSSMarketsMain.xml
               title: Wall Street Journal
 
+# ----------------------------
+# Home
+# ----------------------------
 - name: Home
-  # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
-  # hide-desktop-navigation: true
   columns:
     - size: small
       widgets:
@@ -211,9 +234,8 @@
       widgets:
         - type: weather
           location: Maineville, Ohio, United States
-          units: imperial # alternatively "metric"
-          hour-format: 12h # alternatively "24h"
-          # Optionally hide the location from being displayed in the widget
+          units: imperial
+          hour-format: 12h
 
         - type: markets
           markets:
@@ -230,10 +252,26 @@
 
         - type: releases
           cache: 1d
-          # Without authentication the Github API allows for up to 60 requests per hour. You can create a
-          # read-only token from your Github account settings and use it here to increase the limit.
-          # token: ...
           repositories:
             - glanceapp/glance
             - vaultwarden/vaultwarden
             - pihole/admin
+
+# ----------------------------
+# Instater (To-Do + Server Stats)
+# ----------------------------
+- name: Instater
+  columns:
+    - size: full
+      widgets:
+        # ✅ To-Do List
+        - type: to-do
+          id: personal-todo
+          title: My Tasks
+
+        # 🖥️ Server Stats
+        - type: server-stats
+          servers:
+            - type: local
+              name: Glance Host
+              hide-mountpoints-by-default: false
