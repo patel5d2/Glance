@@ -275,3 +275,65 @@
             - type: local
               name: Glance Host
               hide-mountpoints-by-default: false
+# ----------------------------
+# OSINT
+# ----------------------------
+- name: OSINT
+  columns:
+    - size: full
+      widgets:
+        - type: bookmarks
+          groups:
+            - title: OSINT Tools
+              links:
+                - title: CVE Details
+                  url: https://www.cvedetails.com/
+                  icon: si:cve
+                - title: Whois Lookup
+                  url: http://whois.domaintools.com/
+                  icon: si:whois
+                - title: VirusTotal
+                  url: https://www.virustotal.com/gui/home
+                  icon: si:virustotal
+                - title: IP Logger
+                  url: https://iplogger.org/
+                  icon: si:ip
+                - title: OSINT Framework
+                  url: https://osintframework.com/
+                  icon: si:search
+                - title: Shodan
+                  url: https://www.shodan.io/
+                  icon: si:shodan
+                - title: Recon-ng
+                  url: https://github.com/lanmaster53/recon-ng
+                  icon: si:github
+
+    - size: small
+      widgets:
+        - type: rss
+          title: OSINT News
+          cache: 30m
+          feeds:
+            - url: https://www.schneier.com/blog/atom.xml
+              title: Schneier on Security
+            - url: https://www.darkreading.com/rss.xml
+              title: Dark Reading
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: osint
+              show-thumbnails: true
+            - type: reddit
+              subreddit: netsec
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: search
+          title: Search OSINT Tools
+          engine: google
+          suggestions: true
+          autofocus: true
+          placeholder: "Search for OSINT tools or vulnerabilities..."
+
